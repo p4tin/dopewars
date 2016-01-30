@@ -1,0 +1,19 @@
+{{define "market_prices"}}
+<table class="table table-bordered table-striped table-condensed table-hover">
+    <h3>Market Prices</h3>
+    <thead>
+    <tr>
+        <th>Drug</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range $drug, $price := .Game.Prices }}
+    <tr>
+        <td>{{$drug}}</td>
+        <td>{{ $price | humanizeComma }}</td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+{{end}}

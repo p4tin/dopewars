@@ -1,0 +1,10 @@
+{{define "progress_bar"}}
+<div class="col-xs-12">
+    <div class="progress barspace">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{ .Game.PercentDone }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ .Game.PercentDone }}%">
+            <span> Day {{ .Game.Year }} of 30</span>
+        </div>
+    </div>
+    <h4>Location: {{ .Game.Location }}</h4>
+</div>
+{{end}}
