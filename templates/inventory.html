@@ -1,0 +1,19 @@
+{{define "inventory"}}
+<table class="table table-bordered table-striped table-condensed table-hover">
+    <h3>Inventory</h3>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Drug</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range $drug, $quantity := .Game.Inventory }}
+    <tr>
+        <td>{{$quantity}}</td>
+        <td>{{$drug}}</td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+{{end}}
