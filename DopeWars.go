@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"time"
 	"strconv"
+	"flag"
 
 	"github.com/Pallinder/go-randomdata"
 	"github.com/boltdb/bolt"
@@ -19,6 +20,10 @@ import (
 const NUMBER_OF_LOCATIONS = 5
 const NUMBER_OF_ENCOUNTER = 2
 //var templates = template.Must(template.ParseGlob("templates/*" ))
+
+var (
+	port = flag.String("port", ":8080", "Port for Game")
+)
 
 type ItemPriceRanges struct {
 	Min int
@@ -332,6 +337,7 @@ func initialDrugPrices() map[string]int {
 }
 
 func init() {
+	flag.Parse()
 	rand.Seed(time.Now().Unix())
 	priceRanges = make(map[string]ItemPriceRanges)
 	priceRanges["Acid"] = ItemPriceRanges{Min:1000, Max: 4400}
@@ -373,7 +379,7 @@ func main() {
 	http.HandleFunc("/sell", sellHandler)
 
 	http.HandleFunc("/delete", newgameHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(*port, nil)
 }
 
 func storeGame(sid string, gam Game) {
