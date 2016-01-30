@@ -10,6 +10,7 @@ import (
 	"time"
 	"strconv"
 	"flag"
+	"unicode"
 
 	"github.com/Pallinder/go-randomdata"
 	"github.com/boltdb/bolt"
@@ -74,10 +75,20 @@ func (g *Game) InsertMessage (msg string) {
 
 var db *bolt.DB
 
+func uppercaseFirstLetter(word string) string {
+	a := []rune(word)
+	a[0] = unicode.ToUpper(a[0])
+	return string(a)
+}
+
+
 func createSessionId() string {
 	sid := randomdata.StringNumberExt(4, "-", 4)
+	noun := uppercaseFirstLetter(randomdata.Noun())
+	adj := uppercaseFirstLetter(randomdata.Adjective())
+	name := noun + adj
 	newGame := Game{
-		Name: randomdata.SillyName(),
+		Name: name,
 		Health: 100,
 		Year: 1,
 		Location: Locs[0].Name,
