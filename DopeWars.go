@@ -182,6 +182,7 @@ func ProcessTurn(loc string, sid string, gam Game) Game {
 
 	// We are moving
 	gam.Year++
+	gam.Debt = int( (10.0/100.0) * float64(gam.Debt) + float64(gam.Debt)  )
 	gam.Worth = gam.Cash + gam.Bank - (gam.Debt * 2)
 	log.Println("Game Worth:", gam.Worth, "Cash:", gam.Cash, "Bank:", gam.Bank, "Debt:", gam.Debt)
 	if gam.Year > 30 {
